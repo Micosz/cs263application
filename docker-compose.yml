@@ -1,0 +1,23 @@
+# PostgreSQL สำหรับพัฒนาและทดสอบในเครื่องเท่านั้น (ไม่ใช้บน Vercel)
+# เริ่ม: docker compose up -d   หยุด: docker compose down   ล้างข้อมูล: docker compose down -v
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: asset
+      POSTGRES_PASSWORD: asset
+      POSTGRES_DB: asset_tracker
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./scripts/db-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U asset -d asset_tracker"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  pgdata:

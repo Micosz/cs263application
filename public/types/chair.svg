@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120"><rect x="36" y="8" width="48" height="52" rx="12" fill="#2D3036"></rect>
+<rect x="41" y="13" width="38" height="42" rx="9" fill="#3E424A"></rect>
+<path d="M45 21h30M45 27h30M45 33h30M45 39h30M45 45h30" stroke="#30333A" stroke-width="1.6"></path>
+<rect x="56" y="58" width="8" height="8" fill="#55595F"></rect>
+<rect x="29" y="54" width="4" height="13" fill="#55595F"></rect>
+<rect x="87" y="54" width="4" height="13" fill="#55595F"></rect>
+<rect x="23" y="50" width="16" height="5" rx="2.5" fill="#2D3036"></rect>
+<rect x="81" y="50" width="16" height="5" rx="2.5" fill="#2D3036"></rect>
+<rect x="26" y="64" width="68" height="16" rx="8" fill="#2D3036"></rect>
+<rect x="30" y="64.5" width="60" height="7" rx="3.5" fill="#43474F"></rect>
+<rect x="57" y="80" width="6" height="14" fill="#8A8E96"></rect>
+<rect x="55.5" y="80" width="9" height="5" rx="1" fill="#5A5E66"></rect>
+<path d="M60 95 30 102M60 95l30 7M60 95l-15 12M60 95l15 12" stroke="#43474F" stroke-width="4.5" stroke-linecap="round"></path>
+<circle cx="60" cy="95" r="4.5" fill="#43474F"></circle>
+<circle cx="28" cy="106" r="4" fill="#24262B"></circle><circle cx="92" cy="106" r="4" fill="#24262B"></circle>
+<circle cx="43" cy="111" r="4" fill="#24262B"></circle><circle cx="77" cy="111" r="4" fill="#24262B"></circle></svg>

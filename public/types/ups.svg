@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120"><rect x="34" y="26" width="52" height="76" rx="6" fill="#2D3036"></rect>
+<path d="M34 32a6 6 0 0 1 6-6h40a6 6 0 0 1 6 6v2H34z" fill="#3E424A"></path>
+<rect x="42" y="42" width="36" height="17" rx="2" fill="#15171A"></rect>
+<rect x="44.5" y="44.5" width="31" height="12" rx="1" fill="#8CC4D6"></rect>
+<rect x="49" y="47.5" width="17" height="6" rx="1" fill="none" stroke="#2B5D6E" stroke-width="1.4"></rect>
+<rect x="66" y="49.3" width="2" height="2.4" fill="#2B5D6E"></rect>
+<rect x="51" y="49.2" width="9" height="2.6" fill="#2B5D6E"></rect>
+<circle cx="51" cy="70" r="4.5" fill="#3E424A" stroke="#8A8E96" stroke-width="1.2"></circle>
+<path d="M51 67.3v2.6M48.7 68.4a3.1 3.1 0 1 0 4.6 0" stroke="#D7DADF" stroke-width="1.1" fill="none" stroke-linecap="round"></path>
+<circle cx="63" cy="70" r="3" fill="#3E424A"></circle><circle cx="71" cy="70" r="3" fill="#3E424A"></circle>
+<circle cx="78" cy="70" r="1.4" fill="#6FBF73"></circle>
+<path d="M42 82h36M42 86.5h36M42 91h36" stroke="#3E424A" stroke-width="2" stroke-linecap="round"></path>
+<rect x="38" y="101" width="9" height="3" rx="1" fill="#15171A"></rect><rect x="73" y="101" width="9" height="3" rx="1" fill="#15171A"></rect></svg>
