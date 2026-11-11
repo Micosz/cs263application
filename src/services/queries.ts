@@ -156,6 +156,7 @@ export async function listMyAssets(user: User) {
       roomName: rooms.name,
       reviewedAt: reviews.updatedAt,
       reviewResult: reviews.result,
+      reviewNote: reviews.note,
     })
     .from(assets)
     .innerJoin(rooms, eq(rooms.id, assets.roomId))
@@ -283,6 +284,47 @@ export async function getAssetHistory(assetId: string, limit = 100) {
 
 export type HistoryRow = Awaited<ReturnType<typeof getAssetHistory>>[number];
 
+export const MY_HISTORY_KINDS = {
+  review: ["reviewed"],
+  transfer: ["transfer_requested", "transfer_accepted", "transfer_rejected", "transfer_cancelled"],
+  move: ["room_moved"],
+} as const;
+export type MyHistoryFilter = keyof typeof MY_HISTORY_KINDS;
+
+/** หน้า "ประวัติของฉัน": ทุกรายการที่ผู้ใช้เป็นผู้ทำ ใหม่สุดก่อน */
+export async function listMyHistory(userId: string, filter?: MyHistoryFilter, limit = 200) {
+  return getDb()
+    .select({
+      id: assetEvents.id,
+      kind: assetEvents.kind,
+      createdAt: assetEvents.createdAt,
+      reason: assetEvents.reason,
+      reviewResult: assetEvents.reviewResult,
+      requestId: assetEvents.requestId,
+      actor: actorPerson,
+      fromRoom: fromRoom.code,
+      toRoom: toRoom.code,
+      fromUser: { id: fromUser.id, fullName: fromUser.fullName },
+      toUser: { id: toUser.id, fullName: toUser.fullName },
+      asset: { id: assets.id, code: assets.code, name: assets.name, type: assets.typeKey },
+    })
+    .from(assetEvents)
+    .innerJoin(actor, eq(actor.id, assetEvents.actorId))
+    .innerJoin(assets, eq(assets.id, assetEvents.assetId))
+    .leftJoin(fromRoom, eq(fromRoom.id, assetEvents.fromRoomId))
+    .leftJoin(toRoom, eq(toRoom.id, assetEvents.toRoomId))
+    .leftJoin(fromUser, eq(fromUser.id, assetEvents.fromUserId))
+    .leftJoin(toUser, eq(toUser.id, assetEvents.toUserId))
+    .where(
+      and(
+        eq(assetEvents.actorId, userId),
+        filter ? inArray(assetEvents.kind, [...MY_HISTORY_KINDS[filter]]) : undefined,
+      ),
+    )
+    .orderBy(desc(assetEvents.createdAt), desc(assetEvents.id))
+    .limit(limit);
+}
+
 /* ---------------------------- คนและคำขอ ---------------------------- */
 
 /** บุคลากรในสาขาเดียวกันที่ส่งต่อให้ได้ */
@@ -398,8 +440,7 @@ export async function getHomeSummary(user: User) {
     listMyAssets(user),
     requestSelect()
       .where(and(eq(transferRequests.toUserId, user.id), eq(transferRequests.status, "pending")))
-      .orderBy(desc(transferRequests.createdAt))
-      .limit(3),
+      .orderBy(desc(transferRequests.createdAt)),
   ]);
   const todo = rows.filter((r) => !r.reviewedAt);
   return {

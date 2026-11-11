@@ -49,6 +49,14 @@ export default async function AccountPage({
             <span style={{ fontSize: 14.5 }} className="muted">{rows.length} รายการ</span>
             <Icon name="chevronRight" size={18} color="#6B6B75" />
           </Link>
+          <Link href="/account/history" className="kv" style={{ color: "inherit", textDecoration: "none", minHeight: 56 }}>
+            <span className="k-icon" style={{ width: "auto" }}><Icon name="clock" /></span>
+            <span style={{ flex: 1, display: "flex", flexDirection: "column", lineHeight: 1.4 }}>
+              <span style={{ fontSize: 16 }}>ประวัติของฉัน</span>
+              <span style={{ fontSize: 13.5 }} className="muted">ทบทวน ส่งต่อ รับ และย้ายห้องที่ฉันทำ</span>
+            </span>
+            <Icon name="chevronRight" size={18} color="#6B6B75" />
+          </Link>
           <div className="kv" style={{ minHeight: 56 }}>
             <span className="k-icon" style={{ width: "auto" }}><Icon name="chat" /></span>
             <span style={{ flex: 1, display: "flex", flexDirection: "column", lineHeight: 1.4 }}>
