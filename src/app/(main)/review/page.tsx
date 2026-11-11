@@ -25,18 +25,11 @@ export default async function ReviewPage({ searchParams }: { searchParams: Promi
     );
   }
 
-  // เริ่มที่ชิ้นที่เลือก (ทบทวนซ้ำได้) แล้วต่อด้วยชิ้นที่ยังไม่ทบทวน
+  // เปิดที่ชิ้นที่เลือก (กรองห้องของชิ้นนั้น ทบทวนซ้ำได้) ไม่งั้นเริ่มที่ชิ้นแรกที่ยังไม่ทบทวนของทุกห้อง
   const picked = sp.asset ? rows.find((r) => r.id === sp.asset) : undefined;
-  const todo = rows.filter((r) => !r.reviewedAt && r.id !== picked?.id);
-  const items = (picked ? [picked, ...todo] : todo).map((r) => ({
-    id: r.id,
-    code: r.code,
-    name: r.name,
-    type: r.type,
-    roomCode: r.roomCode,
-  }));
+  const start = picked ?? rows.find((r) => !r.reviewedAt);
 
-  if (!items.length) {
+  if (!start) {
     return (
       <>
         <TopBar title="ทบทวนรอบนี้" back="/mine" />
@@ -48,6 +41,14 @@ export default async function ReviewPage({ searchParams }: { searchParams: Promi
       </>
     );
   }
-  const reviewedBefore = rows.filter((r) => r.reviewedAt && r.id !== picked?.id).length;
-  return <ReviewFlow items={items} totalMine={rows.length} reviewedBefore={reviewedBefore} />;
+  const items = rows.map((r) => ({
+    id: r.id,
+    code: r.code,
+    name: r.name,
+    type: r.type,
+    roomCode: r.roomCode,
+    result: r.reviewResult,
+    note: r.reviewNote,
+  }));
+  return <ReviewFlow items={items} startId={start.id} startRoom={picked ? picked.roomCode : null} />;
 }

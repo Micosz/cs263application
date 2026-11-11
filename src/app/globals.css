@@ -300,6 +300,39 @@ a.item:hover { background: #fafafb; }
 .switch[aria-checked="true"] span { left: 23px; }
 .switch:disabled { opacity: .55; }
 
+/* กองคำขอตามผู้ส่งในหน้าหลัก: พับเป็นกองซ้อน กดแล้วกางในที่เดิม */
+.req-stack { overflow: visible; }
+.req-stack:not([open]) { margin-bottom: 10px; box-shadow: 0 5px 0 -2px #e4e4ea, 0 10px 0 -4px #ebebf0; }
+.req-stack > summary { list-style: none; cursor: pointer; padding: 16px; display: flex; gap: 12px; align-items: flex-start; border-radius: 14px; }
+.req-stack > summary::-webkit-details-marker { display: none; }
+.req-stack[open] > summary { border-bottom: 1px solid var(--line-soft); border-radius: 14px 14px 0 0; }
+.req-stack-peek { font-size: 14px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.req-stack[open] .req-stack-peek { display: none; }
+.req-stack-chev { align-self: center; display: flex; transition: transform .15s; }
+.req-stack[open] .req-stack-chev { transform: rotate(180deg); }
+.req-stack > .item:last-child { border-bottom: 0; border-radius: 0 0 14px 14px; }
+
+/* หน้าทบทวน: ตัวกรองห้อง การ์ดปัดข้าม และแถบชิ้นอื่นด้านล่าง */
+.review-dock { flex-direction: column; gap: 10px; padding-top: 10px; }
+.review-dock > .btn { flex: none; }
+.review-strip { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 3px 16px; }
+.review-strip::-webkit-scrollbar { display: none; }
+.review-strip button {
+  position: relative; flex-shrink: 0; width: 58px; padding: 3px; border: 2px solid transparent; border-radius: 13px;
+  background: transparent; display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.review-strip button[aria-current="true"] { border-color: var(--ink); }
+.review-strip .mono { font-size: 10.5px; max-width: 100%; overflow: hidden; white-space: nowrap; }
+.review-strip .mark {
+  position: absolute; top: -2px; right: -2px; width: 18px; height: 18px; border-radius: 9px; border: 2px solid #fff;
+  display: flex; align-items: center; justify-content: center;
+}
+.review-strip .mark.skip { width: 13px; height: 13px; top: 1px; right: 1px; background: var(--orange); }
+.review-card { touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.review-card.snap { transition: transform .18s, opacity .18s; }
+
+.day-head { padding: 18px 20px 8px; font-size: 14.5px; font-weight: 600; color: var(--muted); }
+
 .table-head { display: none; }
 .dev-box { margin-top: 20px; border: 1px dashed #c9c9d2; border-radius: 14px; padding: 14px; background: #fafafc; }
 .dev-box h2 { font-size: 15px; font-weight: 700; }
